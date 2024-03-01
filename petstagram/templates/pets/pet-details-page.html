@@ -1,0 +1,48 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block page_content %}
+
+    <div class="pet-profile">
+        <div class="profile">
+            <div class="profile-data">
+                <div class="profile_img">
+                    <div class="image">
+                        <!-- Pet URL Image -->
+                        <img src="{{ pet.personal_photo }}"
+                             alt=" Image of {{ pet.name }}">
+                    </div>
+                </div>
+                <div class="personal">
+                    <div class="edit">
+                        {% if is_owner %}
+                        <p>{{ pet.name }}</p>
+                        <!-- Pet Edit Button -->
+                        <a href="{% url 'edit pet' username='meri' pet_slug=pet.slug %}">
+                            <img class="edit-img" src="{% static 'images/edit-pen-icon-6.jpg' %}" alt="edit button">
+                        </a>
+                        <!-- Pet Delete Button -->
+                        <a href="{% url 'delete pet' username='meri' pet_slug=pet.slug %}">
+                            <img class="bin-img" src="{% static 'images/icon-remove-22.jpg' %}" alt="bin button">
+                        </a>
+                        {% endif %}
+                    </div>
+                    <div class="data">
+                        <span>{{ photos_count }}</span>
+                        <p>photos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pet-posts">
+            <h1>hi</h1>
+            {% for photo in pet_photos %}
+                {% include 'partials/photo-item.html' with photo=photo %}
+            {% empty %}
+                <img class="no-posts" src="{% static 'images/no_posts.png' %}" alt="no posts image">
+            {% endfor %}
+        </div>
+    
+    </div>
+
+{% endblock %}

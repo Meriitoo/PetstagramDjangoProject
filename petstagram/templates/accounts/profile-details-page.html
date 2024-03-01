@@ -1,0 +1,132 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block page_content %}
+
+    <!-- Start Profile Details Section -->
+    <div class="profile">
+
+        <!-- Start Profile Personal Data Section -->
+        <div class="profile-data">
+            <div class="profile_img">
+                <div class="image">
+
+                    <!-- Profile Image -->
+                    <img src="{% static 'images/person.png' %}" alt="img8">
+                </div>
+            </div>
+            <div class="personal">
+                <div class="edit">
+                    <!-- User Username -->
+                    <p>{{ object.username }}</p>
+
+                    <!-- IF the viewer is the owner of the profile -->
+                    <!-- Link to Edit Profile Page -->
+                    {%  if is_owner %}
+                        <a href="{% url 'edit user' pk=object.pk %}">
+                            <img class="edit-img" src="{% static 'images/edit-pen-icon-6.jpg' %}" alt="edit button">
+                        </a>
+    
+                        <!-- Link to Delete Profile Page -->
+                        <a href="{% url 'delete user' pk=object.pk %}">
+                            <img class="bin-img" src="{% static 'images/icon-remove-22.jpg' %}" alt="bin button">
+                        </a>
+                        <!-- End IF the viewer is the owner of the profile -->
+                    {% endif %}
+                </div>
+                <div class="data">
+
+                    <!-- Total Number of Photos by the User -->
+                    <span>{{ photos_count }}</span>
+                    <p>photos</p>
+
+                    <!-- Total Number of Pets owned by the User -->
+                    <span>{{ pets_count }}</span>
+                    <p>pets</p>
+
+                    <!-- Total Number of Likes for the User -->
+                    <span>{{ likes_count }}</span>
+                    <p>likes</p>
+                </div>
+                {% if object.get_full_name %}
+                <!-- User First and Last Name IF Added -->
+                <h3 class="names">{{ object.get_full_name }}</h3>
+                {% endif %}
+
+                <!-- User Email Address -->
+                <p class="email">{{  object.email }}</p>
+
+                {% if object.gender %}
+                <!-- User Gender IF Added -->
+                <p class="gender">Male</p>
+                {% endif %}
+            </div>
+        </div>
+        <!-- End Profile Personal Data Section -->
+
+        <!-- Start Pets Data Section -->
+        <div class="pets">
+            <div class="statuses">
+
+                
+                {% for pet in pets %}
+                <!-- Start 1st Pet Details Page -->
+                <!-- Link to First Pet Details Page -->
+                <a href="{%  url 'details pet' pet_slug=pet.slug username=object.username %}">
+                    <div class="head-pet">
+                        <div class="status">
+                            <div class="image">
+                                <!-- Pet Image -->
+                                <img src="{{ pet.personal_photo }}"
+                                     alt="image of {{ pet.name }}">
+                            </div>
+                        </div>
+                        <!-- Pet Name -->
+                        <p>{{ pet.name }}</p>
+                    </div>
+                </a>
+                <!-- End 1st Pet Details Page -->
+                {% endfor %}
+
+            </div>
+        </div>
+        <!-- End Pets Data Section -->
+
+        <!-- Start Last Uploaded Photos Section -->
+        <div class="pet-photos">
+            {% for pet_photo in photos%}
+
+            <!-- Link to Last Uploaded Pet Photo -->
+            <a href="{% url 'details photo' pk=pet_photo.pk %}">
+                <!-- Pet Photo -->
+                <img src="{{ pet_photo.photo.url }}"
+                     alt="pet img">
+            </a>
+            {% endfor %}
+        
+        <div class="pet-photos">
+        
+
+    <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ photos.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ photos.number }} of {{ photos.paginator.num_pages }}.
+                </span>
+
+                {% if photos.has_next %}
+                    <a href="?page={{ photos.next_page_number }}">next</a>
+                    <a href="?page={{ photos.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+    </div>
+</div>
+        
+
+    </div>
+    <!-- End Profile Details Section -->
+
+{% endblock %}
