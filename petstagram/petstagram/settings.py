@@ -171,3 +171,4 @@ LOGIN_REDIRECT_URL = reverse_lazy('index')
 #     EMAIL_BACKEND = 'django.mailjet.backends.MailjetBackend'
 #     MAILJET_API_KEY = 'API-KEY'
 #     MAILJET_API_SECRET = 'API-SECRET'
+

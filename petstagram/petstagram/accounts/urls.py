@@ -3,8 +3,7 @@ import profile
 
 from django.urls import path, include
 
-from petstagram.accounts.views import (SignInView, SignUpView, SignOutView,
-                                       UserDetailsView, UserEditView, UserDeleteView)
+from petstagram.accounts.views import SignInView, SignUpView, SignOutView, UserDetailsView, UserEditView, UserDeleteView
 
 urlpatterns = (
     path('login/', SignInView.as_view(), name='login user'),

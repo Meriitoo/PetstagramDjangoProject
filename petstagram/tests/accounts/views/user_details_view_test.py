@@ -3,9 +3,9 @@ from django.test import TestCase
 from django.urls import reverse_lazy
 from datetime import date
 
-from petstagram.common.models import PhotoLike
-from petstagram.pets.models import Pet
-from petstagram.photos.models import Photo
+from petstagram.petstagram.common.models import PhotoLike
+from petstagram.petstagram.pets.models import Pet
+from petstagram.petstagram.photos.models import Photo
 
 """
 

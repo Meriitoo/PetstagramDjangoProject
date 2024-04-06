@@ -99,6 +99,7 @@ def comment_photo(request, photo_id):
     if form.is_valid():
         comment = form.save(commit=False)  # Does not persist to DB  -> save the photo without save it into db
         comment.photo = photo  # set the photo
+        comment.user = request.user # Assign the logged-in user to the comment
         comment.save()  # save it into db
 
     return redirect('index')

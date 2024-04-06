@@ -10,6 +10,7 @@ urlpatterns = (
         path('delete/', delete_pet, name='delete pet'),
     ])),
 
+
 # http://127.0.0.1:8000/pets/dpncho/pet/gosho/ - slug for nothing
 # http://127.0.0.1:8000/pets/dpncho/pet/gosho/edit/ - slug for edit
 )
